@@ -47,3 +47,74 @@ function cities(){
 
 //call the initialize function when the window has loaded
 $(document).ready(initialize);
+
+//define AJAX function
+function jQueryAjax(){
+    //basic jQuery ajax method
+    $.ajax("data/MegaCities.geojson", {
+        dataType: "json",
+        success: callback
+    });
+};
+
+//define callback function
+function callback(response, status, jqXHRobject){
+    //tasks using the data go here
+    console.log(response);
+};
+
+$(document).ready(jQueryAjax);
+
+//an AJAX function
+function jQueryAjax(){
+    var mydata = $.ajax("data/MegaCities.geojson", {
+        dataType: "json"
+    });
+    return mydata;
+};
+
+var mydata = jQueryAjax();
+
+console.log(mydata); //the jQuery XMLHttpRequest object
+
+function jQueryAjax(){
+    //define a variable to hold the data
+    var mydata;
+
+    //basic jQuery ajax method
+    $.ajax("data/MegaCities.geojson", {
+        dataType: "json",
+        success: function(response){
+            mydata = response;
+
+            //check the data
+            console.log(mydata);
+        }
+    });
+
+    //check the data
+    console.log(mydata);
+};
+
+//script for debugging
+function debugCallback(response){
+	
+	$(mydiv).append('GeoJSON data: ' + JSON.stringify(mydata));
+};
+
+function debugAjax(){
+	
+	var mydata;
+
+	$.ajax("data/MegaCities.geojson", {
+		dataType: "json",
+		success: function(response){
+			
+			debugCallback(mydata);
+		}
+	});
+
+	$(mydiv).append('<br>GeoJSON data:<br>' + JSON.stringify(mydata));
+};
+
+$(mydiv).append('GeoJSON data: ' + JSON.stringify(mydata));
